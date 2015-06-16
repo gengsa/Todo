@@ -28,9 +28,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             TodoModel(id: "3", image: "phone-selected", title: "3, 打电话", date: dateFromString("2015-06-16")!),
             TodoModel(id: "4", image: "travel-selected", title: "4, 旅行", date: dateFromString("2015-06-18")!)
         ]
-        
+        navigationItem.leftBarButtonItem = editButtonItem()
     }
     
+    
+    // tow func from UITableViewDatasource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todos.count
     }
@@ -55,6 +57,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            todos.removeAtIndex(indexPath.row)
+//            self.tableView.reloadData()
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -62,6 +74,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
 
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.tableView.setEditing(editing, animated: animated)
+    }
+    
+    
+    // Unwind Segue
+    @IBAction func close(segue: UIStoryboardSegue) {
+        tableView.reloadData()
+    }
 }
 
 

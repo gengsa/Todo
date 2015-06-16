@@ -13,6 +13,7 @@
 		900869261B2DCDFA00111446 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 900869251B2DCDFA00111446 /* Images.xcassets */; };
 		900869291B2DCDFA00111446 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 900869271B2DCDFA00111446 /* LaunchScreen.xib */; };
 		900869351B2DCDFA00111446 /* TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900869341B2DCDFA00111446 /* TodoTests.swift */; };
+		900DFB081B3071C700F90239 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DFB071B3071C700F90239 /* DetailViewController.swift */; };
 		9092B1261B2F203E00A4064C /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9092B1251B2F203E00A4064C /* TodoModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		9008692E1B2DCDFA00111446 /* TodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		900869331B2DCDFA00111446 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		900869341B2DCDFA00111446 /* TodoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTests.swift; sourceTree = "<group>"; };
+		900DFB071B3071C700F90239 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9092B1251B2F203E00A4064C /* TodoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +83,7 @@
 			children = (
 				9008691E1B2DCDFA00111446 /* AppDelegate.swift */,
 				900869201B2DCDFA00111446 /* ViewController.swift */,
+				900DFB071B3071C700F90239 /* DetailViewController.swift */,
 				900869221B2DCDFA00111446 /* Main.storyboard */,
 				900869251B2DCDFA00111446 /* Images.xcassets */,
 				900869271B2DCDFA00111446 /* LaunchScreen.xib */,
@@ -218,6 +221,7 @@
 				9092B1261B2F203E00A4064C /* TodoModel.swift in Sources */,
 				900869211B2DCDFA00111446 /* ViewController.swift in Sources */,
 				9008691F1B2DCDFA00111446 /* AppDelegate.swift in Sources */,
+				900DFB081B3071C700F90239 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
