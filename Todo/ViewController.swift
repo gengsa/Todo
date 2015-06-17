@@ -74,11 +74,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
 
+    // editting
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         self.tableView.setEditing(editing, animated: animated)
     }
     
+    //move cell
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return editing
+    }
+    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        let todo = todos.removeAtIndex(sourceIndexPath.row)
+        todos.insert(todo, atIndex: destinationIndexPath.row)
+        
+    }
     
     // Unwind Segue
     @IBAction func close(segue: UIStoryboardSegue) {
