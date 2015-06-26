@@ -9,15 +9,17 @@
 import UIKit
 
 var todos: [TodoModel] = []
+var filteredTodos: [TodoModel] = []
 func dateFromString(string: String) ->NSDate? {
     let dateFormatter = NSDateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
     return dateFormatter.dateFromString(string)
 }
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating{
 
     @IBOutlet weak var tableView: UITableView!
+    var searchController: UISearchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,19 +31,42 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             TodoModel(id: "4", image: "travel-selected", title: "4, 旅行", date: dateFromString("2015-06-18")!)
         ]
         navigationItem.leftBarButtonItem = editButtonItem()
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        //        searchController.searchBar.scopeButtonTitles = array()
+        searchController.searchBar.delegate = self
+        self.tableView.tableHeaderView = searchController.searchBar
+        self.definesPresentationContext = false
+        searchController.searchBar.sizeToFit()
+        
+        
     }
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     // tow func from UITableViewDatasource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todos.count
+        if (searchController.active) {
+            return filteredTodos.count
+        } else {
+            return todos.count
+        }
     }
     
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
     // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("todoCell") as! UITableViewCell
-        var todo = todos[indexPath.row] as TodoModel
+        
+        var todo: TodoModel
+        if (searchController.active) {
+            todo = filteredTodos[indexPath.row] as TodoModel
+        } else {
+            todo = todos[indexPath.row] as TodoModel
+        }
+        
+        
+        
         var image = cell.viewWithTag(101) as! UIImageView
         var title = cell.viewWithTag(102) as! UILabel
         var date = cell.viewWithTag(103) as! UILabel
@@ -88,6 +113,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let todo = todos.removeAtIndex(sourceIndexPath.row)
         todos.insert(todo, atIndex: destinationIndexPath.row)
         
+    }
+    
+    //    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    //        filteredTodos = todos.filter({(todo: TodoModel) -> Bool
+    //            in
+    //            return todo.title.rangeOfString(searchText) != nil
+    //
+    //        })
+    //    }
+//    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+//        self.updateSearchResultsForSearchController(self.searchController)
+//    }
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchText = searchController.searchBar.text
+        filteredTodos = todos.filter({(todo: TodoModel) -> Bool
+            in
+            return searchText == "" || todo.title.rangeOfString(searchText) != nil
+        })
+        self.tableView.reloadData()
     }
     
     // Unwind Segue
