@@ -35,9 +35,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchController.dimsBackgroundDuringPresentation = false
         //        searchController.searchBar.scopeButtonTitles = array()
         searchController.searchBar.delegate = self
+        
+        searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
         self.definesPresentationContext = false
-        searchController.searchBar.sizeToFit()
         
         
     }
@@ -115,16 +116,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    //    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-    //        filteredTodos = todos.filter({(todo: TodoModel) -> Bool
-    //            in
-    //            return todo.title.rangeOfString(searchText) != nil
-    //
-    //        })
-    //    }
-//    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-//        self.updateSearchResultsForSearchController(self.searchController)
-//    }
+    
+    //update search result
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchText = searchController.searchBar.text
         filteredTodos = todos.filter({(todo: TodoModel) -> Bool
